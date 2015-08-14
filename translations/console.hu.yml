@@ -9,67 +9,68 @@ application:
             generate-chain: 'Print execution options and arguments as yaml output to be used in chain command'
             generate-inline: 'Print execution options and arguments as inline call to be use in the future'
         messages:
-            completed: 'The command was executed succesfully!'
+            completed: 'A parancs futása sikeres volt!'
             chain:
                 generated: 'Following you can find the yaml representation of your last command execution, i.e copy in ~/.console/chain/sample.yml to execute inside a sequence of commands'
             inline:
                 generated: 'Following you can find the inline representation of this command to re-execute this command later'
-            generated: 'You can now start using the generated code!'
+            generated: 'Aou can now start using the generated code!'
             files:
                 generated: 'Generated or updated files'
                 copied: 'Copied files'
             learning:
-                route: "In order to to create pages it is necessary to define routes for them.\nA route maps a URL path to a controller. It defines with what function\nor method will be called when a URL is accessed.\nIf the user accesses http://drupal8.dev/{{ route }}, the routing\nsystem will look for a route with that path. In this case it will find a\nmatch, and execute the _controller callback. In this case the callback is\ndefined as a classname\n(\"\\Drupal\\{{ module }}\\Controller\\{{ class_name }}\")\nand a method (\"{{ method_name }}\")."
+                route: "Oldalak létrehozásához szükséges útvonal (route) meghatározása.\nA route határozza meg, hogy egy adott URL-t mely Controllernek adjuk át.\nMely metődust hív meg az adtt URL.\nHa a felhasználó betölti a http://drupal8.dev/{{ route }}, a route\nrendszer ellenőtzi, hogy mely route tartozik az URL-hez. Találat esetén\nvégrehajtja a _controller hívást. A hívás osztálynévként van definiálva\n(\"\\Drupal\\{{ module }}\\Controller\\{{ class_name }}\")\nmetódus neve: (\"{{ method_name }}\")."
         errors:
-            invalid-command: 'Command "%s" is not defined.'
+            invalid-command: 'A "%s" parancs nincs definiálva.'
     site:
         messages:
-            path: 'Site path'
+            path: 'Elérési útvonal'
         errors:
             directory: 'In order to list all of the available commands, you should run this inside a drupal root directory.'
-            settings: 'In order to list all of the available commands you should install drupal first.'
+            settings: 'Az összes elérhető parancs megjelenítéséhez először a drupalt telepíteni kell.'
+            directorz: 'Az összes elérhető parancs megjelnítéséhez a console-nak a drupal könyvtárból kell futnia.'
     user:
         messages:
             path: 'User home path'
 commands:
     common:
         options:
-            module: 'O nome do módulo.'
-            services: 'Carrega serviços do container.'
-            tags: 'Set service tags from the container.'
-            inputs: 'Cria entradas de formulário.'
-            permissions: 'Create permissions.'
+            module: 'A Modul neve.'
+            services: 'Service betöltése a container-ből.'
+            tags: 'Service tag-ek hozzárendelése a container-hez.'
+            inputs: 'Beviteli mezők létrehozása formhoz.'
+            permissions: 'Jogosultságok létrehozása.'
         questions:
-            module: 'Digite o nome do módulo'
-            confirm: 'Você confirma a criação'
-            canceled: 'Criação de comando cancelada.'
+            module: 'Modul neve'
+            confirm: 'Létrehozás megerősítése'
+            canceled: 'Létrehozás parancs megszakítva.'
             services:
-                confirm: 'Você deseja carregar serviços do container'
-                message: "\nDigite o nome do serviçõ ou use as setas para cima e para baixo\nIsto é opcional, precione <info>enter</info> para <info>continuar</info>\n"
-                name: 'Digite seu serviço'
+                confirm: 'Betölthető service a container-be'
+                message: "\nService neve vagy fel és le billentyűk.\nEz opcionális, <info>enter</info> a <info>folytatáshoz</info>\n"
+                name: 'Service megadása'
             inputs:
-                confirm: 'Você deseja de gerar uma estrutura de formulário'
-                label: 'Label do input'
-                machine_name: 'Nome de máquina do input'
-                permission: 'Do you want to generate permissions'
-                type: Tipo
-                invalid: 'Tipo de field "%s" inválido.'
-                description: Description
+                confirm: 'Form struktúra létrehozása?'
+                label: 'Beviteli mező címke'
+                machine_name: 'Beviteli mező gépi neve'
+                permission: 'Jogosultságok létrehozása'
+                type: Típus
+                invalid: 'Mező típus "%s" helytelen.'
+                description: Leírás
         errors:
-            module-dependency: 'Missing module dependency "%s"'
-            class-name-empty: 'The Class name can not be empty'
+            module-dependency: 'Hiányzó modul függőség "%s"'
+            class-name-empty: 'A Class neve nem lehet üres'
     cache:
         rebuild:
-            description: 'Reconstruir e limpar todos os caches do site.'
+            description: 'Minden gyorsítótár újraépítése és törlése.'
             options:
-                cache: 'Apenas limpar um cache específico.'
+                cache: 'Csak bizonyos gyorsítótár törlése.'
             messages:
-                welcome: 'Bem-vindo ao comando cache:rebuild.'
-                rebuild: 'Recriando cache(s), favor aguarde um momento.'
-                completed: 'Limpesa de cache(s) finalizada.'
-                invalid_cache: 'Cache "%s" e invalido.'
+                welcome: 'Üdvözlet a cache:rebuild parancsban'
+                rebuild: 'Gyorsítótár újraépítése, türelem'
+                completed: 'Gyorsítótár törlése kész.'
+                invalid_cache: 'A "%s" gyorsítótár név helytelen.'
             questions:
-                cache: 'Selecione o cache.'
+                cache: 'Gyorsítótár kiválasztása.'
     chain:
         description: 'Chain command execution'
         options:
@@ -80,33 +81,33 @@ commands:
             module_install: 'module:install command is not runnable inside a chain queue and must be run independently.'
     config:
         export:
-            description: 'Export current application configuration.'
+            description: 'Jelenlegi alkalmazás beállításainak exportálása.'
             arguments:
-                directory: 'Define export directory to save configuration output.'
+                directory: 'Export könyvtár meghatározása a beállítások mentéséhez.'
             messages:
-                directory: 'Your configuration export file was stored in %s'
+                directory: 'A beállítások export fájl mentése megtörtént: %s'
         debug:
-            description: 'Exibe a configuração atual.'
+            description: 'Jelenlegi beállítások megjelenítése.'
             arguments:
-                config-name: 'Nome da configuração.'
+                config-name: 'Beállítás neve.'
         override:
-            description: 'Override config value in active configuration.'
+            description: 'Beállítás felülírása.'
             arguments:
-                config-name: 'Configuration name.'
-                key: Key
-                value: Value
+                config-name: 'Beállítás neve.'
+                key: Kulcs
+                value: Érték
             messages:
-                configuration: 'Configuration name'
-                configuration-key: 'Configuration key'
-                original: 'Original Value'
-                updated: 'Override Value'
+                configuration: 'Beállítás neve'
+                configuration-key: 'Beállítás kulcs'
+                original: 'Beállítás érték'
+                updated: 'Érték felülírása'
         edit:
-            description: 'Edit the selected configuration.'
+            description: 'Kiválasztott beállítások szerkesztése.'
             arguments:
-                config-name: 'Configuration name.'
-                editor: Editor.
+                config-name: 'Beállítás neve.'
+                editor: 'Szerkesztő program.'
             messages:
-                no-directory: 'An error occurred while creating your directory at'
+                no-directory: 'A következő könyvtár létrehozása közben hiba lépett fel:'
         import-single:
             description: 'Import the selected configuration.'
             arguments:
@@ -114,62 +115,61 @@ commands:
                 input-file: 'Path to the import files.'
     container:
         debug:
-            description: 'Exibe serviços atuais para um aplicativo.'
+            description: 'Alkalmazáshoz tartozó service megjelenítése.'
             messages:
-                service_id: 'ID do serviço'
-                class_name: 'Nome da classe'
+                service_id: 'Service ID'
+                class_name: 'Class név'
     drush:
-        description: 'Roda drush via console.'
-        help: 'Use o modo interativo para uma melhor experiência --shell.'
+        description: 'drush futtatása console-ból.'
+        help: 'Interaktív mód a felhasználói élmény fokozásáért --shell.'
         arguments:
-            args: 'argumentos para o Drush.'
+            args: 'Drush argumentumok.'
         messages:
-            not_found: 'Comando Drush não encontrado.'
+            not_found: 'Drush parancs nem található.'
     generate:
         authentication:
             provider:
-                description: 'Generate an Authentication Provider'
-                help: 'The <info>generate:authentication:provider</info> command helps you generate a new Authentication Provider.'
-                options:
-                    class-name: 'Authentication Provider class'
-                    provider-id: 'Provider ID'
+                description: 'Authentication Provider létrehozása'
+                help: 'A <info>generate:authentication:provider</info> parancs új Authentication Provider létrehozásában segít.'
+                options: null
                 module: common.options.module
+                class-name: 'Authentication Provider class neve'
         command:
-            description: 'Cria comandos via console.'
-            help: 'O comando <info>generate:command</info> te ajuda a criar um novo comando.'
-            welcome: 'Bem-vindo ao Criador de comandos do Drupal.'
+            description: 'Console parancsok létrehozása.'
+            help: 'A <info>generate:command</info> parancs új parancsok létrehozásában segít.'
+            welcome: 'Üdvözlet a Drupal Parancs létrehozásban'
             options:
                 module: common.options.module
                 controller-title: 'Controller title'
-                class-name: 'Nome da classe do comando'
-                command: 'Nome do comando'
-                container: 'Acessa o container de serviços'
+                class-name: 'Parancs Class neve'
+                command: 'Parancs neve'
+                container: 'services container elérése'
             questions:
                 module: common.questions.module
-                class-name: 'Digite o nome da classe do comando.'
-                command: 'Digite o nome do comando.'
-                container: 'Você precisa de acesso o container de serviços?'
+                class-name: 'Parancs Class nevének megadása'
+                command: 'Parancs nevének megadása'
+                container: 'Service container elérése szükséges'
                 controller-title: 'Controller title'
             messages:
                 title-not-empty: 'Title cannot be empty'
         controller:
-            description: 'Cria e Registra um controller'
-            help: 'O comando <info>generate:controller</info> ajuda você a criar um novo controller.'
-            welcome: 'Bem-vindo ao Criador de controller do Drupal.'
+            description: 'Controller létrehozása és regisztrálása'
+            help: 'A <info>generate:controller</info> parancs új Controller létrehozásában segít.'
+            welcome: 'Üdvözlet a Drupal Controller létrehozásában'
             options:
                 module: common.options.module
-                class-name: 'Nome da classe do Controller'
-                method-name: 'O nome do método'
-                route: 'O caminho da rota'
+                class-name: 'Controller Class neve'
+                method-name: 'Az akció metódus neve'
+                route: 'Az elérési útvonal'
                 services: common.options.services
-                test: 'Criar uma classe de teste'
+                test: 'Teszt osztály létrehozása'
             questions:
                 module: common.questions.module
-                class-name: 'Digite o nome da classe do Controller'
-                method-name: 'Digite o nome do método'
-                route: 'Digite o caminho da rota'
+                class-name: 'Controller Class nevének megadása'
+                method-name: 'Az akció metódus nevének megadása'
+                route: 'Az elérési útvonal megadása'
                 services: common.questions.services
-                test: 'Você deseja criar uma classe de teste unitário?'
+                test: 'Unit teszt osztály létrehozása'
                 other-controller-title: 'Controller title (empty to start with code generation)'
                 controller-title: 'Controller title'
             messages:
@@ -180,69 +180,67 @@ commands:
                 invalid-route: 'Route cannot be empty'
                 route-already-added: 'Route was already added'
         entity:
-            description: 'Cria uma nova "%s"'
-            help: 'O comando <info>"%s"</info> ajuda você a criar uma nova "%s"'
-            welcome: 'Bem-vindo ao Criador de entidade do Drupal.'
+            description: 'Új "%s" létrehozása'
+            help: 'A <info>"%s"</info> parancs új "%s" létrehozásában segít'
+            welcome: 'Üdvözlet a Drupal Entity létrehozásában'
             options:
                 module: common.options.module
-                entity-class: 'O nome da classe da entidade'
-                entity-name: 'O nome da entidade'
+                entity-class: 'Az Entity osztály neve'
+                entity-name: 'Az Entity neve'
                 label: 'The entity label'
             questions:
                 module: common.questions.module
-                entity-class: 'Digite o nome da classe da entidade'
-                entity-name: 'Digita o nome da entidade'
+                entity-class: 'Entity osztály nevének megadása'
+                entity-name: 'Entity nevének megadása'
                 label: 'Enter the entity label'
         form:
-            description: 'Cria um novo "%s"'
-            help: 'O comando <info>"%s"</info> ajuda você a criar um novo "%s"'
-            welcome: 'Bem-vindo ao Criador de formulário do Drupal.'
+            description: 'Új "%s" létrehozása'
+            help: 'A <info>"%s"</info> parancs új "%s" létrehozásában segít'
+            welcome: 'Üdvözlet a Drupal Form létrehozásában'
             options:
                 module: common.options.module
-                class-name: 'O nome da classe do Formulário'
-                form-id: 'O id do formulário'
+                class-name: 'A Form Class neve'
+                form-id: 'A Form ID'
                 services: common.options.services
                 inputs: common.options.inputs
-                routing: 'Atualizar roteamento'
+                routing: 'Routing frissítése'
             questions:
                 module: common.questions.module
-                class-name: 'Digite o nome da classe do fomrulário'
-                form-id: 'Digite o id do formulário'
+                class-name: 'Form Class nevének megadása'
+                form-id: 'Form ID megadása'
                 services: common.questions.services
                 inputs: common.questions.inputs
-                routing: 'Arquivo de atualização de roteamento'
+                routing: 'Routing fájl frissítése'
         module:
-            description: 'Criar um módulo.'
-            help: 'O comando <info>generate:module</info> ajuda você a criar um novo módulo.'
-            welcome: 'Bem-vindo ao Criador de módulo do Drupal.'
+            description: 'Modul létrehozása.'
+            help: 'A <info>generate:module</info> új modul létrehozásában segít.'
+            welcome: 'Üdvözlet az új Modul létrehozásában'
             options:
-                module: 'O nome do módulo'
-                machine-name: 'O nome de máquina (apenas minúsculas e sublinhado)'
-                module-path: 'O caminho do módulo'
-                description: 'Descrição do módulo'
-                core: 'Versão do core'
-                package: 'Pacote do módulo'
-                controller: 'Controller padrão'
+                module: 'A modul neve'
+                machine-name: 'Gépi név (angol kis betűk és aláhúzás)'
+                module-path: 'A modul elérési útvonala'
+                description: 'Modul leírása'
+                core: 'Drupal verzió'
+                package: 'Modul csomag'
+                controller: 'Alapértelmezett Controller'
                 composer: 'Add a composer.json file'
-                dependencies: 'Module dependencies separated by commas (i.e. context, panels)'
-                test: 'Criar uma classe de teste'
-                structure: 'Gerar estrutura de diretório'
+                dependencies: 'Modul függőségek vesszővel elválasztva (pl. context, panels)'
+                test: 'Teszt osztály létrehozása'
             questions:
-                module: 'Digite o nome do módulo'
-                machine-name: 'Digite o nome de máquina do módulo'
-                module-path: 'Digite o caminho do módulo'
-                description: 'Digite a descrição do módulo'
-                core: 'Digite a versão do core do Drupal'
-                package: 'Digite o nome do pacote'
-                controller: 'Você deseja criar um Controller padrão'
+                module: 'Modul nevének megadása'
+                machine-name: 'Modul gépi nevének megadása'
+                module-path: 'A modul elérési útvonalának megadása'
+                description: 'Modul leírásának megadása'
+                core: 'Drupal Core verzió megadása'
+                package: 'Csomag nevének megadása'
+                controller: 'Alapértelmezett Controller szükséges'
                 composer: 'Do you want to add a composer.json file to your module'
-                dependencies: 'Would you like to add module depencencies'
-                test: 'Você deseja criar uma classe de teste unitário'
-                structure: 'Você deseja criar a estrutura de diretório'
+                dependencies: 'Modul függőségek hozzáadása szükséges'
+                test: 'Unit teszt osztály létrehozható'
             warnings:
-                module-unavailable: 'Warning The following modules are not already available in your local environment "%s"'
+                module-unavailable: 'Figyelem, a következő modulok még nem elérhetőek a helyi Drual telepítésben: "%s"'
             errors:
-                directory-exists: 'The target directory "%s" is not empty.'
+                directory-exists: 'A célkönyvtás "%s" nem üres.'
         theme:
             description: 'Generate a theme.'
             help: 'The <info>generate:theme</info> command helps you generates a new theme.'
@@ -286,39 +284,39 @@ commands:
             errors:
                 directory-exists: 'The target directory "%s" is not empty.'
         permission:
-            description: 'Generate module permissions'
-            help: 'The <info>generate:permissions</info> command helps you generate new permissions'
+            description: 'Modul jogosultságok létrehozása'
+            help: 'A <info>generate:permissions</info> modul jogosultságok létrehozásában segít'
             options:
                 module: common.options.module
-                permission: 'Enter a permission'
+                permission: 'Jogosultság megadása'
             questions:
                 module: common.questions.module
-                permission: 'Enter a permission'
+                permission: 'Jogosultság megadása'
                 title: 'Enter a title for the permision'
                 description: 'Enter a description for the permision'
                 restrict-access: 'Restrict Access'
                 add: 'Do you want add another permission'
         plugin:
             block:
-                description: 'Criar plugin de bloco.'
-                help: 'O comando <info>generate:plugin:block</info> ajuda você a criar um novo plugin de bloco.'
-                welcome: 'Bem-vindo ao Criador de plugin de bloco do Drupal.'
+                description: 'Plugin block létrehozása'
+                help: 'A <info>generate:plugin:block</info> parancs új Plugin block létrehozásában segít.'
+                welcome: 'Üdvözlet a  Drupal Plugin Block létrehozásában'
                 options:
                     module: common.options.module
-                    class-name: 'Nome da classe do plugin'
-                    label: 'Label do plugin'
-                    plugin-id: 'Id do plugin'
+                    class-name: 'Plugin Class neve'
+                    label: 'Plugin címke'
+                    plugin-id: 'Plugin ID'
                     inputs: common.options.inputs
                     services: common.options.services
                 questions:
                     module: common.questions.module
-                    class-name: 'Digite o nome da classe do plugin'
-                    label: 'Digite a label do plugin'
-                    plugin-id: 'Digite o id do plugin'
+                    class-name: 'Plugin class nevének megadása'
+                    label: 'Plugin címke megadása'
+                    plugin-id: 'Plugin ID megadása'
                     inputs: common.questions.inputs
                     services: common.questions.services
                 messages:
-                    inputs: "\nVocê pode adicionar alguns campos para criar configurações especiais em cada bloco\nIsso é opcional, pressione <info>enter</info> para <info>continuar</info>"
+                    inputs: "\nTetszőleges beviteli mező hozzáadható, melyek a blokk beállításakor jelenik meg.\nEz opcionális, <info>enter</info> a <info>folytatáshoz</info>"
             field:
                 description: 'Generate field type, widget and formatter plugins.'
                 help: 'The <info>generate:plugin:field</info> command helps you generate a full set of field plugin: field type, field formatter and field widget.'
@@ -406,65 +404,65 @@ commands:
                     plugin-id: 'Enter the plugin id'
                     field-type: 'Enter the field type the plugin can be used with'
             imageeffect:
-                description: 'Criar plugin de efeito de imagem.'
-                help: 'O comando <info>generate:plugin:imageeffect</info> ajuda você a criar um novo plugin de efeito de imagem.'
-                welcome: 'Bem-vindo ao Criador de plugin de efeito de imagem do Drupal'
+                description: 'Kép hatás beépülő létrehozása.'
+                help: 'A <info>generate:plugin:imageeffect</info> parancs kép hatás beépülő létrehozásában segít.'
+                welcome: 'Üdvözlet a kép hatás beépülő létrehozásában'
                 options:
                     module: common.options.module
-                    class-name: 'Nome da classe do plugin'
-                    label: 'Label do plugin'
-                    plugin-id: 'Id do plugin'
-                    description: 'Descrição do plugin'
+                    class-name: 'Plugin class neve'
+                    label: 'Plugin címke'
+                    plugin-id: 'Plugin ID'
+                    description: 'Plugin leírás'
                 questions:
                     module: common.questions.module
-                    class-name: 'Digite o nome da classe do plugin'
-                    label: 'Digite a label do plugin'
-                    plugin-id: 'Digite o id do plugin'
-                    description: 'Digite a descrição do plugin'
+                    class-name: 'Plugin class nevének megadása'
+                    label: 'Plugin címke megadása'
+                    plugin-id: 'Plugin ID megadása'
+                    description: 'Plugin leírás megadása'
             rest:
                 resource:
-                    description: 'Generate plugin rest resource'
-                    help: 'The <info>generate:plugin:rest:resource</info> command helps you generate a new rest resource.'
-                    welcome: 'Welcome to the Drupal Plugin Rest Resource generator'
+                    description: 'REST erőforrás beépülő létrehozása'
+                    help: 'A <info>generate:plugin:rest:resource</info> parancs új REST erőforrás beépülő létrehozásában segít.'
+                    welcome: 'Üdvözlet a REST erőforrás beépülő létrehozásában'
                     options:
                         module: common.options.module
-                        class-name: 'Plugin Rest Resource class'
-                        plugin-id: 'Plugin Rest Resource id'
-                        plugin-label: 'Plugin Rest Resource Label'
-                        plugin-url: 'Plugin Rest Resource URL'
-                        plugin-states: 'Plugin Rest Resource States'
+                        class-name: 'REST erőforrás beépülő class'
+                        plugin-id: 'REST erőforrás beépülő azonosító'
+                        plugin-label: 'REST erőforrás beépülő címke'
+                        plugin-url: 'REST erőforrás beépülő url'
+                        plugin-states: 'REST erőforrás beépülő States'
                     questions:
                         module: common.questions.module
-                        class-name: 'Enter the plugin rest resource name'
-                        plugin-id: 'Enter the plugin rest resource id'
-                        plugin-label: 'Enter the plugin rest resource label'
-                        plugin-url: 'Enter the plugin rest resource url'
-                        plugin-states: 'Please select what REST States implement in your resource (GET is selected by default)'
+                        class-name: 'REST erőforrás beépülő class nevének megadása'
+                        plugin-id: 'REST erőforrás beépülő azonosító megadása'
+                        plugin-label: 'REST erőforrás beépülő címke megadása'
+                        plugin-url: 'REST erőforrás beépülő url megadása'
+                        plugin-states: 'REST State megadása (GET alapértelmezetten kiválasztott)'
                     messages:
-                        selected-states: 'States selected'
+                        selected-states: 'Kiválasztott State'
             rulesaction:
                 description: 'Generate a plugin rule action'
-                help: 'The <info>generate:plugin:rulesaction</info> command helps you generate a new Plugin rule action.'
-                welcome: 'Welcome to the Drupal Plugin Rules Action generator'
+                help: 'A <info>generate:plugin:rulesaction</info> parancs új Rula akció létrehozásában segít.'
+                welcome: 'Üdvözlet a Drupal Rules Akció Beépülő létrehozásában'
                 options:
                     module: common.options.module
-                    class-name: 'Plugin class name'
-                    label: 'Plugin label'
-                    plugin-id: 'Plugin id'
+                    class-name: 'Beépülő class neve'
+                    label: 'Beépülő címke'
+                    plugin-id: 'Beépülő id'
                     inputs: common.options.inputs
                     services: common.options.services
-                    category: 'Plugin category'
-                    context: 'Plugin context'
+                    category: 'Beépülő kategória'
+                    context: 'Beépülő kontextus'
                     type: 'Action Type (user or node)'
                 questions:
                     module: common.questions.module
-                    class-name: 'Enter the plugin class name'
-                    label: 'Enter the plugin label'
-                    plugin-id: 'Enter the plugin id'
+                    class-name: 'Beépülő class nevének megadása'
+                    label: 'Beépülő címke megadása'
+                    plugin-id: 'Beépülő id megadása'
                     inputs: common.questions.inputs
                     services: common.questions.services
-                    category: 'Enter plugin category'
-                    context: 'Enter plugin context'
+                    category: 'Beépülő kategória megadása'
+                    context: 'Beépülő kontextus megadása'
             type:
                 annotation:
                     description: 'Generate a plugin type with annotation discovery'
@@ -495,78 +493,79 @@ commands:
                         plugin-name: 'Enter the plugin type machine name'
                         plugin-file-name: 'Enter the plugin file name (e.g. MODULE.plugin.filename.yml)'
         service:
-            description: 'Criar serviço'
-            help: 'O comando <info>generate:service</info> ajuda você a criar um novo serviço.'
-            welcome: 'Bem-vindo ao Criador de serviço do Drupal'
+            description: 'Service létrehozása'
+            help: 'A <info>generate:service</info> új service létrehozásában segít.'
+            welcome: 'Üdvözlet az új service létrehozásában'
             options:
                 module: common.options.module
-                service-name: 'Nome do serviço'
-                class-name: 'Nome da classe'
-                interface: Interface
+                service-name: 'Service neve'
+                class-name: 'Class neve'
+                interface: Interfész
                 services: common.questions.services
             questions:
                 module: common.questions.module
-                service-name: 'Digite o nome do serviço'
-                class-name: 'Digite o nome da classe'
-                interface: 'Create an interface'
+                service-name: 'Service nevének megadása'
+                class-name: 'Class nevének megadása'
+                interface: 'Interfész létrehozása'
                 services: common.options.services
     init:
         description: 'Copy configuration files to user home directory.'
     module:
         debug:
-            description: 'Display current modules available for application'
+            description: 'Elérhető modulok megjelenítése'
             options:
-                status: 'Module status [enabled|disabled]'
-                type: 'Module type [core|no-core]'
+                status: 'Modul állapot [engedélyezett|tiltott]'
+                type: 'Module típus [core|no-core]'
             messages:
                 id: ID
-                name: Name
-                status: Status
-                origin: Origin
-                package: Package
-                enabled: Enabled
-                disabled: Disabled
+                name: Név
+                status: Állapot
+                origin: Származás
+                package: Csomag
+                enabled: Engedélyezett
+                disabled: Tiltott
         install:
-            description: 'Install module or modules in the application'
+            description: 'Modul vagy modulok telepítése'
             questions:
                 module: 'Module name (press <return> to stop adding modules)'
                 invalid-module: 'Invalid module %s'
             options:
-                module: 'Module or modules to be enabled should be separated by a comma'
+                module: 'Modul vagy modulok engedélyezése vesszővel elválasztott lista alapján'
             messages:
-                no-modules: 'You must provide module or modules to enable.'
-                missing: 'Unable to install modules %s due to missing modules %s'
-                missing-dependencies: 'Unable to install modules %s due to missing dependencies %s'
-                nothing: 'Nothing to do. All modules are already installed'
-                dependencies: 'Are you sure you want to install dependencies: %s?'
-                success: 'The following module(s) were installed successfully: %s'
+                no-modules: 'Engedélyezni kívánt modul vagy modulok megadása kötelező.'
+                missing: '%s modulok telepítése sikertelen hiányzó modulok miatt: %s'
+                missing-dependencies: '%s modulok nem telepíthetők hiányzó függőségek miatt: %s'
+                nothing: 'Nincs teendő, minden modul már telepítve volt.'
+                dependencies: 'Biztosan telepíthetők a következő függőségek: %s?'
+                success: '%s modul sikeresen telepítve lett'
                 disabled-modules: 'Only disabled modules will be listed in autocomplete'
         uninstall:
-            description: 'Uninstall module or modules in the application'
+            description: 'Modul vagy modulok eltávolítása'
             messages:
-                no-modules: 'You must provide module or modules to uninstall.'
-                dependents: 'Unable to uninstall modules %s because are required by %s'
-                nothing: 'Nothing to do. All modules are already uninstalled'
-                success: 'The following module(s) were uninstalled successfully: %s'
+                no-modules: 'Eltávolítani kívánt modul vagy modulok megadása kötelező.'
+                dependents: '%s nem távolítható el, mert függősége más moduloknak: %s'
+                nothing: 'Nincs teendő, minden modul már el lett távolítva.'
+                success: '%s Sikeresen el lett távolítva'
         download:
-            description: 'Download module or modules in application'
+            description: 'Modul vagy modulok letöltése'
             options:
                 version: 'Module version i.e 1.x-dev'
             messages:
-                no-releases: 'There aren''t any releases for module %s'
-                getting-releases: 'Getting releases for module %s'
-                downloading: 'Downloading module %s release %s'
+                no-releases: 'Nincs elérhető kiadás: %s'
+                getting-releases: '%s modulhoz kiadás letöltése'
+                downloading: '%s modul %s kiadásának letöltése'
                 downloaded: 'Module %s version %s was downloaded successfully at %s'
                 select-release: 'Please select your favorite release'
+                installed: '%s modul sikeresen telepítve lett'
     migrate:
         debug:
-            description: 'Display current migration available for the application'
+            description: 'Elérhető migrációk megjelenítése'
             arguments:
-                drupal-version: 'Drupal Version'
+                drupal-version: 'Drupal Verzió'
             messages:
-                id: 'Migration Id'
-                description: Description
-                version: Version
+                id: 'Migráció Id'
+                description: Leírás
+                version: Verzió
         load:
             description: 'Generate a migration entity.'
             arguments:
@@ -579,155 +578,153 @@ commands:
                 override: 'The File is already install, do you want override it [yes/no] ?'
                 file: 'Path to file'
         execute:
-            description: 'Execute a migration available for application'
+            description: 'Elérhető migráció futtatása'
             arguments:
-                id: 'Migration id(s)'
+                id: 'Migráció Id'
             options:
-                site-url: 'Site Source URL'
-                db-host: 'Database Host'
-                db-name: 'Database Name'
-                db-user: 'Database User'
-                db-pass: 'Database Pass'
-                db-prefix: 'Database Prefix'
-                db-port: 'Database Port'
+                site-url: 'Oldal forrás URL'
+                db-host: 'Adatbázis Host'
+                db-name: 'Adatbázis Név'
+                db-user: 'Adatbázis Felhasználó'
+                db-pass: 'Adatbázis jelszó'
+                db-prefix: 'Adatbázis Prefix'
+                db-port: 'Adatbázis Port'
                 exclude: 'Migration id(s) to exclude'
             questions:
-                id: 'Migration Id'
+                id: 'Migráció Id'
                 exclude-id: 'Migration Id to exlude (press <return> to stop adding migrations)'
                 other-id: 'Other migration id (press <return> to stop adding migrations)'
-                site-url: 'Source Site URL'
-                db-host: 'Database Host'
-                db-name: 'Database Name'
-                db-user: 'Database User'
-                db-pass: 'Database Pass'
-                db-prefix: 'Database Prefix'
-                db-port: 'Database Port'
-                invalid-migration-id: 'Migration Id "%s" is invalid'
+                site-url: 'Oldal forrás URL'
+                db-host: 'Adatbázis Host'
+                db-name: 'Adatbázis Név'
+                db-user: 'Adatbázis Felhasználó'
+                db-pass: 'Adatbázis jelszó'
+                db-prefix: 'Adatbázis Prefix'
+                db-port: 'Adatbázis Port'
+                invalid-migration-id: '"%s" érvénytelen migráció id'
             messages:
-                processing: 'Processing Migration "%s"'
-                imported: 'Migration "%s" was imported correctly'
-                fail-load: 'Migration "%s" can''t be loaded'
-                importing-incomplete: 'Importing migration "%s"'
-                import-stoped: 'Import "%s" stopped by request'
-                import-fail: 'Import "%s" failed'
-                import-skipped: 'Import "%s" was skipped due to unfulfilled dependencies'
-                wrong-source: 'Upgrading from this version of Drupal is not supported.'
+                processing: '"%s" migráció feldolgozása'
+                imported: '"%s" migráció sikeresen feldolgozásra került'
+                fail-load: '"%s" migráció nem tölthető be'
+                importing-incomplete: '"%s" migráció feldolgozása'
+                import-stoped: 'Import ''"%s" futása meg lett szakítva'''
+                import-fail: 'Import ''"%s" hibás'''
+                import-skipped: 'Import "%s" ki lett hagyva teljesíthehtlen függőség miatt'
+                wrong-source: 'Frissítés erről a Drupal verzióról nem támogatott.'
                 destination-error: 'Database destination error'
                 source-error: 'Database source error'
                 no-migrations: 'There are not migrations available to be executed'
     rest:
         enable:
-            description: 'Enable a rest resource for the application'
+            description: 'REST erőforrás engedélyezése'
             arguments:
-                resource-id: 'Rest ID'
-                states: 'REST States to enable for Rest resource'
-                authorizations: 'Authorizations providers enabled for Rest Resource'
+                resource-id: 'REST ID'
+                states: 'REST State engedélyezése REST erőforrás számára'
+                authorizations: 'Authorizations provider engedélyezése REST erőforrás számára'
             questions:
-                resource-id: 'Rest ID'
+                resource-id: 'REST ID'
             messages:
-                invalid-rest-id: 'Rest ID %s is invalid'
-                formats: 'Available serialization formats'
-                authentication-providers: 'Available Authentication Providers'
-                selected-state: 'Selected State'
-                selected-formats: 'Selected formats'
-                selected-authentication-providers: 'Selected Authentication Providers'
+                invalid-rest-id: 'REST ID %s érvénytelen'
+                formats: 'Elérhető szérializáló formátumok'
+                authentication-providers: 'Elérhető Authentication Provider-ek'
+                selected-state: 'Kiválasztott State'
+                selected-formats: 'Kiválasztott formátumok'
+                selected-authentication-providers: 'Kiválasztott Authentication Provider-ek'
         disable:
-            description: 'Disable a rest resource for the application'
+            description: 'REST erőforrás letiltása'
             arguments:
-                resource-id: 'Rest ID'
-                states: 'REST States to disable for Rest resource'
+                resource-id: 'REST ID'
+                states: 'REST State letiltása a REST erőforrásból'
             questions:
-                resource-id: 'Rest ID'
+                resource-id: 'REST ID'
             messages:
-                invalid-rest-id: 'Rest ID %s is invalid'
+                invalid-rest-id: 'REST ID %s érvénytelen'
         debug:
-            description: 'Display current rest resource for the application'
+            description: 'REST erőforrás megjelenítése'
             arguments:
-                resource-id: 'Rest ID'
+                resource-id: 'REST ID'
             options:
-                status: 'Rest resource status enabled | disabled'
+                status: 'REST erőforrás állapot engedélyezett | tiltott'
             messages:
-                id: 'Rest ID'
-                label: Label
+                id: 'REST ID'
+                label: Címke
                 canonical_url: 'Canonical URL'
-                status: Status
-                provider: Provider
-                enabled: Enabled
-                disabled: Disabled
-                rest-state: 'REST States'
-                supported-formats: 'Supported Formats'
-                supported_auth: 'Supported Authentication Providers'
-                not-found: 'Rest resource %s not found'
+                status: Állapot
+                provider: Ellátó
+                enabled: Engedélyezett
+                disabled: Tiltott
+                rest-state: 'REST State'
+                supported-formats: 'Támogatott formátumok'
+                supported_auth: 'Támogatott Authentication Provider-ek'
+                not-found: 'REST erőforrás %s nem található'
     router:
         debug:
-            description: 'Exibe as rotas atuais de uma aplicação'
+            description: 'Elérhető útvonalak megjelenítése'
             arguments:
-                route-name: 'Nomes das rotas'
+                route-name: 'Útvonal neve'
             messages:
-                name: 'Nome da rota'
-                path: 'Caminho da classe'
-                pattern: Pattern
-                defaults: Padrão
-                options: Opções
+                name: 'Útvonal neve'
+                path: 'Class elérési útvonala'
+                pattern: Minta
+                defaults: Alapértelmezés
+                options: Opciók
         rebuild:
-            description: 'Reconstruir rotas de uma aplicação'
+            description: 'Útvonalak újraépítése'
             arguments:
-                route-name: 'Nomas das rotas'
+                route-name: 'Útvonal neve'
             messages:
-                rebuilding: 'Reconstruindo rotas, favor aguarde um momento'
-                completed: 'Reconstrução de rota(s) finalizada.'
+                rebuilding: 'Útvonalak újraépítése, kis türelmet'
+                completed: 'Útvonalak újraépítése befejeződött.'
     self-update:
-        description: 'Update the console to latest version.'
-        help: 'Update the console command to the latest version.'
+        description: 'Console frissítése a legújabb verzióra.'
+        help: 'Console parancs frissítése a legújabb elérhető verzióra.'
         messages:
-            success: 'The console has been updated to the latest version.'
+            success: 'A console frissítve lett a legújabb verzióra.'
             current-version: 'The latest version %s, was already installed on your system.'
     site:
         mode:
-            description: 'Switch system performance configuration'
+            description: 'Rendszer teljesítmény beállításának módosítása'
             arguments:
-                environment: 'Enviroment name'
+                environment: 'Környezet neve'
             messages:
-                configuration: 'Configuration name'
-                configuration-key: 'Configuration key'
-                original: 'Original Value'
-                updated: 'Override Value'
+                configuration: 'Konfiguráció neve'
+                configuration-key: 'Konfiguráció kulcs'
+                original: 'Eredeti érték'
+                updated: 'Módisított érték'
         status:
-            description: 'View current Drupal Installation status'
+            description: 'A jelenlegi Drupal telepítés állapotának megtekintése'
             messages:
-                application: Application
-                system: 'System Info'
+                application: Applikáció
+                system: 'Rendszer Információk'
                 hash_salt: 'Hash salt'
                 console: 'Console version'
-                database: 'Database connection'
-                driver: Driver
+                database: 'Adatbázis kapcsolat'
+                driver: Meghajtó
                 host: Host
                 port: Port
-                username: Username
-                password: Password
-                theme: Themes
-                connection: Connection
-                theme_default: 'Default theme'
-                theme_admin: 'Admin theme'
-                directory: Directories
-                directory_root: 'Site root directory'
-                directory_temporary: 'Site temporary directory'
-                directory_theme_default: 'Default theme directory'
-                directory_theme_admin: 'Admin theme directory'
+                username: 'Felhasználói név'
+                password: Jelszó
+                theme: Sminkek
+                connection: Kapcsolat
+                theme_default: 'Alapértelmezett smink'
+                theme_admin: 'Admin smink'
+                directory: Könyvtárak
+                directory_root: 'Oldal gyökérkönyvtára'
+                directory_temporary: 'Oldal ideiglenes könyvtára'
+                directory_theme_default: 'Alapértelmezett smink könyvtár'
+                directory_theme_admin: 'Admin smink könyvtár'
                 configuration: Configuration
                 active: 'Active config path'
                 staging: 'Staging config path'
-            arguments:
-                fields-group: 'show a set of fields groupping by type All available groups are: version, database, theme, directories'
         maintenance:
-            description: 'Switch site into maintenance mode'
+            description: 'Oldal átállítása karbantartási módba'
             arguments:
-                mode: 'Site maintenance mode'
+                mode: 'Karbantartási mód'
             messages:
-                maintenance-on: 'Operating in maintenance mode on'
-                maintenance-off: 'Operating in maintenance mode off'
+                maintenance-on: 'Karbantartási mód be'
+                maintenance-off: 'Karbantartási mód ki'
             errors:
-                invalid-mode: 'Invalid maintance mode'
+                invalid-mode: 'Helytelen karbantartási mód'
         new:
             description: 'Create a new Drupal project'
             arguments:
@@ -742,17 +739,17 @@ commands:
                 error-copying: 'An error occurred while renaming your directory at %s'
     test:
         debug:
-            description: 'List Test Units available for the application.'
-            help: 'Update the console command to the latest version.'
+            description: 'Elérhető unit tesztek megjelenítése.'
+            help: 'Console parancs frissítése a legújabb verzióra.'
             arguments:
-                test-id: 'Test Unit ID'
+                test-id: 'Unit Teszt ID'
             options:
-                group: Group
+                group: Csoport
             messages:
-                id: 'Test Unit ID'
-                description: Description
-                group: Group
-                success: 'The console has been updated to the latest version.'
+                id: 'Unit Teszt ID'
+                description: Leírás
+                group: Csoport
+                success: 'A console sikeresen frissítve lett a legújabb verzióra.'
     password:
         hash:
             description: 'Generate a hash from a plaintext password.'
